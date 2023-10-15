@@ -170,4 +170,5 @@ return {
 			"rcarriga/nvim-notify",
 		}
 	},
+
 }
