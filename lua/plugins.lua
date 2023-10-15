@@ -171,4 +171,6 @@ return {
 		}
 	},
 
+	-- Neodev (Neovim lua API)
+	{ "folke/neodev.nvim", opts = {} },
 }

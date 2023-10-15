@@ -14,3 +14,9 @@ keymap("n", "[b", ":bprevious<CR>", opts)
 keymap("n", "]b", ":bnext<CR>", opts)
 keymap("n", "[B", ":bfirst<CR>", opts)
 keymap("n", "]B", ":blast<CR>", opts)
+
+-- :h to %% 
+vim.cmd([[
+" expands to dir of current file in cmd mode
+	cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+]])
