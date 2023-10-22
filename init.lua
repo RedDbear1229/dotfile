@@ -9,6 +9,7 @@ vim.cmd("let wiki_2.path = '~/mywiki/vimwiki/'")
 vim.cmd("let wiki_2.syntax = 'markdown'")
 vim.cmd("let wiki_2.ext = 'md'")
 vim.cmd("let g:vimwiki_list = [wiki_1, wiki_2]")
+vim.cmd("let g:vimwiki_conceallevel = 0")
 
 require "options"
 require "keymap"
