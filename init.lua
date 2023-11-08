@@ -26,3 +26,9 @@ require "toggleterm-config"
 require "lsp-config"
 require "noice-config"
 require "whichkey-config"
+
+vim.cmd([[
+	let g:taskwiki_dont_preserve_folds = "yes"
+	let g:taskwiki_dont_fold = "yes"
+]])
+

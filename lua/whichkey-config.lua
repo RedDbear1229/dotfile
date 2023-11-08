@@ -84,6 +84,8 @@ local mappings = {
     ["m"] = { "<cmd>Mason<cr>", "Mason" }, -- LSP Manager
     ["p"] = { "<cmd>Lazy<CR>", "Plugin Manager" }, -- Invoking plugin manager
     ["r"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Reformat Code" },
+	["w"] = { "<cmd>lua require('nvim-window').pick()<cr>", "Windows" }, -- Swichting between windows 
+	["b"] = { "<cmd>TagbarToggle<cr>", "Tagbar" }, -- Toggle Tagbar 
 
     -- Language Support
     l = {
@@ -104,10 +106,12 @@ local mappings = {
         f = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "Find files" },
         t = { "<cmd>Telescope live_grep <cr>", "Find Text Pattern" },
         r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
+		v = { "<cmd>Telescope vw<cr>", "Vimwiki"},
     },
 
     s = {
         name = "Search",
+		b = { "<cmd>Telescope telescope-tabs list_tabs<cr>", "Find Buffers" },
         h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
         m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
         r = { "<cmd>Telescope registers<cr>", "Registers" },
@@ -127,6 +131,13 @@ local mappings = {
         v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" }, -- Vertical Terminal
     },
 
+	-- Vimwiki 
+	v = {
+		name = "Vimwiki",
+		a = { "<cmd>VimwikiIndex 1<cr>", "Index 1" },
+		b = { "<cmd>VimwikiIndex 2<cr>", "Index 2" },
+		v = { "<cmd>Telescope vw<cr>", "Search Wiki" },
+	},
 }
 
 which_key.setup(setup)
