@@ -15,20 +15,6 @@ return {
 		lazy = true, 
 	}, 
 
-	-- Legendary (Key-map plugin) 
-	{ 
-		'mrjones2014/legendary.nvim', 
-		-- since legendary.nvim handles all your keymaps/commands, 
-		-- its recommended to load legendary.nvim before other plugins 
-		keys = { 
-			{ "", "Legendary", desc = "Legendary" }, 
-			{ "hc", "Legendary", desc = "Command Palette" }, 
-		}, 
-		opts = { 
-			which_key = { auto_register = true }, 
-		}, 
-	}, 
-
 	-- vimwiki 
 	{ 
 		"vimwiki/vimwiki", 
@@ -207,22 +193,22 @@ return {
 		} 
 	}, 
 
--- Gutentags (generation ctags in background) 
+	-- Gutentags (generation ctags in background) 
 	{ "ludovicchabant/vim-gutentags" }, 
 
--- nvim-window (switching between windows) 
+	-- nvim-window (switching between windows) 
 	{ "yorickpeterse/nvim-window" }, 
 
--- Middleclass (OOP library for lua) 
+	-- Middleclass (OOP library for lua) 
 	{ "anuvyklack/middleclass" }, 
 
--- Animation.nvim (OOP library to create animations) 
+	-- Animation.nvim (OOP library to create animations) 
 	{ 
 		"anuvyklack/animation.nvim", 
 		requires = { 'anuvyklack/middleclass' }, 
 	}, 
 
--- windows.nvim (Automatically expand width of the current window) 
+	-- windows.nvim (Automatically expand width of the current window) 
 	{ 
 		"anuvyklack/windows.nvim", 
 		requires = { 
@@ -237,12 +223,24 @@ return {
 		end 
 	}, 
 
--- vim-plugin-AnsiEsc 
+	-- vim-plugin-AnsiEsc 
 	{ "powerman/vim-plugin-AnsiEsc" }, 
 
--- Vim-Taskwarrior 
+	-- Vim-Taskwarrior 
 	{ "farseer90718/vim-taskwarrior" }, 
 
--- Taskwiki 
+	-- Taskwiki 
 	{ "tools-life/taskwiki" }, 
+
+	-- legendary
+	{
+		'mrjones2014/legendary.nvim',
+		-- since legendary.nvim handles all your keymaps/commands,
+		-- its recommended to load legendary.nvim before other plugins
+		priority = 10000,
+		lazy = false,
+		-- sqlite is only needed if you want to use frecency sorting
+		dependencies = { 'kkharji/sqlite.lua' },
+	},
+
 } 
