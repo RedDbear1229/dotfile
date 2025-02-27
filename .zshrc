@@ -76,11 +76,10 @@ eval "$(starship init zsh)"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-        git
-        zsh-autosuggestions
-        autojump
-        aliases
-        z
+	git
+	zsh-autosuggestions
+	aliases
+	z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -122,21 +121,58 @@ alias vimtutor='vim -u ~/vimtutor-sequel/vimtutor-sequel.vimrc -U NONE ~/vimtuto
 
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/user/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/user/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/user/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/user/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+_tv_smart_autocomplete() {
+    emulate -L zsh
+    zle -I
 
-if [ -f "/home/user/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/home/user/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
+    local current_prompt
+    current_prompt=$LBUFFER
+
+    local output
+
+    output=$(tv --autocomplete-prompt "$current_prompt" $*)
+
+
+    if [[ -n $output ]]; then
+        zle reset-prompt
+        RBUFFER=""
+        # add a space if the prompt does not end with one
+        [[ "${current_prompt}" != *" " ]] && current_prompt="${current_prompt} "
+        LBUFFER=$current_prompt$output
+
+        # uncomment this to automatically accept the line
+        # (i.e. run the command without having to press enter twice)
+        # zle accept-line
+    fi
+}
+
+_tv_shell_history() {
+    emulate -L zsh
+    zle -I
+
+    local current_prompt
+    current_prompt=$LBUFFER
+
+    local output
+
+    output=$(tv zsh-history --input "$current_prompt" $*)
+
+
+    if [[ -n $output ]]; then
+        zle reset-prompt
+        RBUFFER=""
+        LBUFFER=$output
+
+        # uncomment this to automatically accept the line
+        # (i.e. run the command without having to press enter twice)
+        # zle accept-line
+    fi
+}
+
+
+zle -N tv-smart-autocomplete _tv_smart_autocomplete
+zle -N tv-shell-history _tv_shell_history
+
+
+bindkey '^T' tv-smart-autocomplete
+bindkey '^R' tv-shell-history
